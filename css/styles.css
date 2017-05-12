@@ -56,10 +56,11 @@ section{
 	color: #fff;
 	border: none;
 	padding: 5px;
+	width: 81%;
+	float: right
 }
 
-.reserve p input,
-.reserve p button{
+.reserve p input{
 	width: 80%;
 	float: right
 }

@@ -10,12 +10,26 @@
   };
   firebase.initializeApp(config);
 
-
 //Reservation update and read code start
 
 // Connect to Database
 var database = firebase.database();
 
+var customerName = $(".cName"),
+	dayReserved = $(".reserveDay");
+
+$("#reservationForm").on("submit", function(ev){
+	ev.preventDefault();
+	
+	//$('.reservations').empty();
+
+	database.ref('reservations').push({
+		name: customerName.val(),
+		day: dayReserved.val()
+	});
+	
+	getReservationsUpdate();
+});
 
 
 //repeated code for page load and update database events
@@ -23,9 +37,8 @@ function readData(para){
 	    // Code to execute when a value change occurs
      var allReservations = para.val();
 
-
-     // get each of the reservation details
      
+     // get each of the reservation details     
       for (var reservation in allReservations) {
 
       // Create an object literal with the data we'll pass to Handlebars
@@ -36,8 +49,7 @@ function readData(para){
   
       console.log(context.name + " yo!");
 
-        //add the reservation details to the template
-        
+        //add the reservation details to the template        
         var source = $("#reservation-template").html();
         var template = Handlebars.compile(source);
         var reservationListItem = template(context);
@@ -47,26 +59,22 @@ function readData(para){
 }
 
 // let  user read the reservations when loading the page eg .once().then
-function getReservationsOnLoad (){
+function getReservationsOnLoad(){
   database.ref('reservations').once('value').then(function (results) {
   	readData(results);
   });
 }
 
 //update reservations list when user udpates database
-function getReservationsUpdate (){
+function getReservationsUpdate(){
   database.ref('reservations').on('value', function (results) {
-  	  //remove any reservations that are currently being displayed in the reservations list
-
   	$('.reservations').empty();
+  	  //remove any reservations that are currently being displayed in the reservations list  	
   	readData(results);
   });
 }
 
-//ADD THE getReservationsUpdate(); FUNCTION CALL TO THE EVENT WHICH UDPATES THE DATABASE
-
 getReservationsOnLoad ();
-
 
 
 //Google Maps code start
