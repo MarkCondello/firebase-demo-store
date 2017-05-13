@@ -46,9 +46,18 @@ section{
 	font-weight: bold;
 }
 
-.reserve p,
-.reserve table{
+.reserve p{
 	padding: 0 50px;
+}
+
+.reserve table{
+	padding: 0 50px 50px;
+	border: none;
+}
+
+.reserve td{
+    width: 50%;
+    text-align: center;
 }
 
 .reserve p button{

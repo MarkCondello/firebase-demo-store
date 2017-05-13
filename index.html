@@ -39,16 +39,7 @@
                 <th>Day</th>
               </thead>
                 <!-- include handlebars template data within .reservations --> 
-              <tbody class="reservations">
-                
-                                        
-                 <script id="reservation-template" type="text/x-handlebars-template">
-                 <tr >
-                    <td>{{name}}</td>
-                    <td>{{day}}</td>                 
-                </tr>          
-                </script>
-
+              <tbody class="reservations">             
               </tbody>
             </table>
         </div>
@@ -87,6 +78,14 @@
     <!-- google maps --> 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfLZGzgq7WRmXEwT7X-3vLDtzQ_mmZfNA&callback=initMap">
     </script>
+
+
+    <script id="reservation-template" type="text/x-handlebars-template">
+                 <tr >
+                    <td>{{name}}</td>
+                    <td>{{day}}</td>                 
+                </tr>          
+                </script>
 
     </body>
   </html>

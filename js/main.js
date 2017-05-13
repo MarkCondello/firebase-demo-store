@@ -15,47 +15,52 @@
 // Connect to Database
 var database = firebase.database();
 
-var customerName = $(".cName"),
-	dayReserved = $(".reserveDay");
-
 $("#reservationForm").on("submit", function(ev){
 	ev.preventDefault();
 	
-	//$('.reservations').empty();
+	//input details
+	var customerName = $(".cName").val(),
+	dayReserved = $(".reserveDay").val();
 
-	database.ref('reservations').push({
-		name: customerName.val(),
-		day: dayReserved.val()
-	});
+
+	if(customerName === ""){
+		alert("Please enter your name for a reservation.");
+	} else if(dayReserved === ""){
+		alert("Please enter a day for the reservation.");
+	}else{
+
+		database.ref('reservations').push({
+			name: customerName,
+			day: dayReserved
+		});	
+		getReservationsUpdate();
 	
-	getReservationsUpdate();
+	}
 });
 
 
 //repeated code for page load and update database events
 function readData(para){
 	    // Code to execute when a value change occurs
-     var allReservations = para.val();
-
+    var allReservations = para.val();
      
      // get each of the reservation details     
-      for (var reservation in allReservations) {
+    for (var reservation in allReservations) {
 
-      // Create an object literal with the data we'll pass to Handlebars
-      var context = {
-        name: allReservations[reservation].name,
-        day: allReservations[reservation].day
-      };
+		// Create an object literal with the data we'll pass to Handlebars
+		var context = {
+			name: allReservations[reservation].name,
+			day: allReservations[reservation].day
+		};
   
-      console.log(context.name + " yo!");
+		console.log(context.name + " yo!");
 
         //add the reservation details to the template        
         var source = $("#reservation-template").html();
         var template = Handlebars.compile(source);
         var reservationListItem = template(context);
         $('.reservations').append(reservationListItem);
-
-      }
+ 	}
 }
 
 // let  user read the reservations when loading the page eg .once().then
