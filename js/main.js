@@ -11,7 +11,6 @@
   firebase.initializeApp(config);
 
 //Reservation update and read code start
-
 // Connect to Database
 var database = firebase.database();
 
@@ -21,7 +20,6 @@ $("#reservationForm").on("submit", function(ev){
 	//input details
 	var customerName = $(".cName").val(),
 	dayReserved = $(".reserveDay").val();
-
 
 	if(customerName === ""){
 		alert("Please enter your name for a reservation.");
@@ -38,7 +36,6 @@ $("#reservationForm").on("submit", function(ev){
 	}
 });
 
-
 //repeated code for page load and update database events
 function readData(para){
 	    // Code to execute when a value change occurs
@@ -53,8 +50,6 @@ function readData(para){
 			day: allReservations[reservation].day
 		};
   
-		console.log(context.name + " yo!");
-
         //add the reservation details to the template        
         var source = $("#reservation-template").html();
         var template = Handlebars.compile(source);
@@ -80,7 +75,6 @@ function getReservationsUpdate(){
 }
 
 getReservationsOnLoad ();
-
 
 //Google Maps code start
 function initMap(){
@@ -109,5 +103,4 @@ function initMap(){
 }
 
 initMap();
-
 //Google Maps code end
