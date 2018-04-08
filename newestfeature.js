@@ -1,4 +1,3 @@
-function getUrlsSLug(){
-
-	
+function getUrlsSLug(string){
+	return string = urlEncode(string);	
 }
